@@ -17,6 +17,14 @@ class ShoppingCart:
         else:
             print("\n無效的商品編號或商品已售完。")
 
+    def remove_from_cart(self, product_id):
+        for index, item in enumerate(self.shopping_cart):
+            if item['id'] == product_id:
+                del self.shopping_cart[index]
+                print(f"\n商品 {product_id} 已從購物車移除。")
+                return
+        print(f"\n商品 {product_id} 不存在於購物車中。")
+
     def view_cart(self):
         if not self.shopping_cart:
             print("\n購物車是空的。")
