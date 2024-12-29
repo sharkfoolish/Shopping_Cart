@@ -135,5 +135,18 @@ class TestShoppingCart(unittest.TestCase):
         self.assertEqual(len(cart.shopping_cart), 0)
         self.assertNotIn(product_id, [item['id'] for item in cart.shopping_cart])
 
+    def test_remove_nonexistent_product_from_cart(self):
+        cart = self.cart
+        product_id = 3
+        expected_output = f"\n商品 {product_id} 不存在於購物車中。\n"
+        cart.add_to_cart(1)
+
+        sys.stdout = StringIO()
+        cart.remove_from_cart(product_id)
+        actual_output = sys.stdout.getvalue()
+        sys.stdout = sys.__stdout__
+
+        self.assertEqual(actual_output, expected_output)
+
 if __name__ == '__main__':
     unittest.main()
